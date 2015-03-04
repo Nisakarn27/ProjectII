@@ -12,7 +12,7 @@
         'tabs' => array(
             array(
                 'label' => 'หน้าแรก',
-               'content' =>  $this->renderPartial('_news',array(),true,false)." <hr>".
+               'content' =>  $this->renderPartial('news',array('dataProvider'=>$dataProvider,),true,false)." <hr>".
             		 $this->renderPartial('_invite',array(),true,false),
 
                 'active' => true

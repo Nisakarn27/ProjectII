@@ -13,7 +13,7 @@
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
    <br>
-      <img src="<?php echo Yii::app()->request->baseUrl.'/images/testpic.jpg ';?>" style="border-color: red;" width="200" /> 
+      <img src="<?php echo Yii::app()->request->baseUrl.'/images/testpic.jpg ';?>" style="border-color: red;" width="200" height="200" /> 
  
       <div class="caption">
         <h3>"ชมรมสานฝันปันรอยยิ้ม" </h3>

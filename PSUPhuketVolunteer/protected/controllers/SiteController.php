@@ -26,10 +26,17 @@ class SiteController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
-	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+	
+	{$dataProvider=new CActiveDataProvider('News',array(
+    'criteria'=>array(
+        'order'=>'Counter DESC',
+    ),
+     'pagination'=>array(
+        'pageSize'=>2,
+    ),));
+		$this->render('index',array(
+		'dataProvider'=>$dataProvider,
+		));
 	}
 
 	/**
