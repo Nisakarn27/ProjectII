@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2015 at 03:16 PM
+-- Generation Time: Mar 09, 2015 at 06:24 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `project3_se03`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity_tb`
+--
+
+CREATE TABLE IF NOT EXISTS `activity_tb` (
+  `ActivityID` int(11) NOT NULL DEFAULT '0',
+  `ActivityName` varchar(200) NOT NULL,
+  `ActivityDetail` text NOT NULL,
+  `ActivityDateStart` date NOT NULL,
+  `ActivityDateStop` date NOT NULL,
+  `ImageActivity` varchar(200) NOT NULL,
+  `VideoActivity` varchar(200) NOT NULL,
+  `InsertBy` int(11) NOT NULL,
+  `InsertDate` datetime NOT NULL,
+  `Suggestion` varchar(200) NOT NULL,
+  `Problem` text NOT NULL,
+  `Counter` int(11) NOT NULL,
+  `LocationID` int(11) NOT NULL,
+  PRIMARY KEY (`ActivityID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1018,6 +1041,34 @@ INSERT INTO `faculty` (`FacultyID`, `FacultyName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `helping_tb`
+--
+
+CREATE TABLE IF NOT EXISTS `helping_tb` (
+  `HelpingID` int(11) NOT NULL AUTO_INCREMENT,
+  `HelpingName` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`HelpingID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `helping_tb`
+--
+
+INSERT INTO `helping_tb` (`HelpingID`, `HelpingName`) VALUES
+(1, 'เด็ก เยาวชน'),
+(2, 'สตรี สิทธิสตรี'),
+(3, 'รับบริจาคอวัยวะ ร่างกาย'),
+(4, 'พัฒนาชุมชนและชนบท'),
+(5, 'เทคโนโลยี/สารสนเทศ'),
+(6, 'ผู้ป่วย/ผู้ติดยาเสพติด'),
+(7, 'การศึกษา / พัฒนาศักยภาพ'),
+(8, 'ผู้ประสบภัยพิบัติ'),
+(9, 'ช่วยเหลือสัตว์'),
+(10, 'ชนกลุ่มน้อย / ชาวต่างด้าว');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `location_volunteer`
 --
 
@@ -1053,13 +1104,21 @@ CREATE TABLE IF NOT EXISTS `news` (
   `NewsTitle` varchar(200) NOT NULL,
   `NewsDetail` text NOT NULL,
   `NewsImage` varchar(200) NOT NULL,
-  `InsertBy` int(11) NOT NULL,
-  `InsertDateTime` datetime NOT NULL,
-  `UpdateBy` int(11) NOT NULL,
-  `UpdateDatetime` datetime NOT NULL,
+  `InsertBy` int(11) DEFAULT NULL,
+  `InsertDateTime` datetime DEFAULT NULL,
+  `UpdateBy` int(11) DEFAULT NULL,
+  `UpdateDatetime` datetime DEFAULT NULL,
   `Counter` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`NewsID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`NewsID`, `NewsHeader`, `NewsTitle`, `NewsDetail`, `NewsImage`, `InsertBy`, `InsertDateTime`, `UpdateBy`, `UpdateDatetime`, `Counter`) VALUES
+(11, 'รพ.กรุงเทพภูเก็ต ต้องการเลือด Group B ด่วน!!!', 'เข้าร่วมบริจาคได้ตั้งแต่วันที่ 20 มีนาคม 2558 เป็น...', 'การบริจาคเลือด\r\n', 'volunteer_need.jpg', NULL, NULL, NULL, NULL, 3),
+(12, 'โครงการสวนผักฮักเมือง ขอเชิญชาวเชียงใหม่ร่วมประกวด...', 'ส่งภาพถ่ายสวยผักอินทรีย์ของเท่าน จำนวน 5 ภาพ พร้อม...', 'ส่งภาพถ่ายสวยผักอินทรีย์ของเท่าน จำนวน 5 ภาพ พร้อมคำบรรยาย แรงจูงใจในการปลูกผักอินทรีย์กินเอง ความยาวไม่เกินครั่งหน้ากระดาษ A4 ชิงเงินรางวัล', '20150227-2-2.jpg', NULL, NULL, NULL, NULL, 7);
 
 -- --------------------------------------------------------
 
@@ -1154,6 +1213,51 @@ INSERT INTO `province` (`ProvinceID`, `ProvinceName`) VALUES
 (74, 'อุตรดิตถ์'),
 (75, 'อุทัยธานี'),
 (76, 'อุบลราชธานี');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_help`
+--
+
+CREATE TABLE IF NOT EXISTS `request_help` (
+  `RequestID` int(11) NOT NULL AUTO_INCREMENT,
+  `HelpingID` int(11) NOT NULL,
+  `LocationID` int(11) NOT NULL,
+  `RequestName` varchar(200) NOT NULL,
+  `RequestDetail` text NOT NULL,
+  `DateTimeStart` datetime NOT NULL,
+  `DateTimeStop` datetime NOT NULL,
+  `Counter` int(11) NOT NULL,
+  `Activate` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`RequestID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slide_image`
+--
+
+CREATE TABLE IF NOT EXISTS `slide_image` (
+  `SlideImage1` varchar(200) DEFAULT 'noimage.jpg',
+  `SlideImage2` varchar(200) DEFAULT 'noimage.jpg',
+  `SlideImage3` varchar(200) DEFAULT 'noimage.jpg',
+  `SlideImage4` varchar(200) DEFAULT 'noimage.jpg',
+  `Caption_1` varchar(200) DEFAULT NULL,
+  `Caption_2` varchar(200) DEFAULT NULL,
+  `Caption_3` varchar(200) DEFAULT NULL,
+  `Caption_4` varchar(200) DEFAULT NULL,
+  `SlideImageID` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`SlideImageID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `slide_image`
+--
+
+INSERT INTO `slide_image` (`SlideImage1`, `SlideImage2`, `SlideImage3`, `SlideImage4`, `Caption_1`, `Caption_2`, `Caption_3`, `Caption_4`, `SlideImageID`) VALUES
+('rotarac.jpg', 'rotarac.jpg', 'testpic.jpg', 'volunteer.png', 'ชมรมโรตาแร็คddddd', 'ตึก', '789', '101112', 1);
 
 -- --------------------------------------------------------
 
