@@ -42,6 +42,7 @@
 </head>
 
 <body>
+
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container-fluid">
@@ -50,26 +51,73 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="<?php echo Yii::app()->homeURL; ?>"><?php echo Yii::app()->name ?></a>
+			
 				<div class="nav-collapse">
-					
+				<img src="<?php echo Yii::app()->theme->baseUrl . '/img/Logo4.png';?>  "  width="200px" height="100px" />
+	
+					<?php $this->widget('zii.widgets.CMenu',array(
+					 	'htmlOptions' => array(
+                    	'class'=>'nav nav-pills pull-right',
+                        ),
+							'encodeLabel'=>false,
+
+						'activeCssClass'	=> 'active',
+						'items'=>array(
+							array('label'=>'เพิ่มข่าว','url'=>array('news/create'),'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'เปลี่ยนภาพ slide','url'=>array('slideimage/update'),'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'location','url'=>array('LocationVolunteer/create'),'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'request','url'=>array('requestHelp/create'),'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'สมัครสมาชิก','url'=>array('profileMerchant/admin'),'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'เข้าสู่ระบบ','url'=>array('site/login'),'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'เกี่ยวกับเรา','url'=>array('profileMerchant/admin'),'visible'=>Yii::app()->user->isGuest),
+
+						//array('label'=>'Merchant Management','url'=>array('profileMerchant/admin'),'visible'=>Yii::app()->user->isGuest),
+						
+						
+	
+						
+						
+						),
+					)); ?>
+			
 				</div><!--/.nav-collapse -->
 				
 			</div>
+		
 		</div>
+			<?php $this->widget('application.extensions.mbmenu.MbMenu',array(
+            'items'=>array(
+                array('label'=>'หน้าแรก', 'url'=>array('/site/index')),
+                array('label'=>'ค้นหาสถานที่ทำกิจกรรม', 'url'=>array('/locationVolunteer/index')),
+				array('label'=>'กิจกรรมที่ผ่านมา', 'url'=>array('/site/contact')),
+				array('label'=>'ขอความช่วยเหลือ', 'url'=>array('/requesthelp/create')),
+				array('label'=>'อาสาสมัคร ม.อ.ภูเก็ต', 'url'=>array('/site/contact')),
+				array('label'=>'ชมรมอาสา ม.อ.ภูเก็ต', 'url'=>array('/site/contact')),
+				
+			),
+         
+             
+           
+    )); ?>
 	</div>
 
-    <div class="container-fluid">
-      <?php echo $content ?>
 
-  
-	<div class="navbar navbar-fixed-bottom">
-	<div class="navbar-inner">
-			<div class="container-fluid">
-      
-        <p>&copy; Yii FINAL <?php echo date('Y'); ?></p>
-      
-</div></div>
-    </div><!--/.fluid-container-->
+    <div class="container-fluid">
+    <div class="span12">
+    <div class="span1"></div>
+        <div class="span10 well">
+    <br>
+      <?php echo $content ?>
+</div>
+  </div>
+
 </body>
+  <footer>
+	<div class="nav navbar-fixed-bottom">
+	<div class="navbar-inner">
+			
+      
+        <p>&copy; Copyright <?php echo date('Y'); ?></p>
+      
+</div></div></footer>
 </html>

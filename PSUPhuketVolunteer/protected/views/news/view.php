@@ -1,32 +1,26 @@
-<?php
-$this->breadcrumbs=array(
-	'News'=>array('index'),
-	$model->NewsID,
-);
+	
+<div class="span1"></div>
+<div class="span4">
+ <div class="list-group">
+            <li class="list-group-item">
+  <a class="th" href="index.php?r=news/view&id=<?php echo $model->NewsID;?>">
+ <img src="<?php echo Yii::app()->request->baseUrl.'/upload/News/'.$model->NewsImage;?>" style="border-color: red;" width="500" height="900" /> 
+</a>
+</li>
+        </div><!--/span-->
+</div>
+	<div class="span6">
 
-$this->menu=array(
-array('label'=>'List News','url'=>array('index')),
-array('label'=>'Create News','url'=>array('create')),
-array('label'=>'Update News','url'=>array('update','id'=>$model->NewsID)),
-array('label'=>'Delete News','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->NewsID),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage News','url'=>array('admin')),
-);
-?>
-
-<h1>View News #<?php echo $model->NewsID; ?></h1>
-
-<?php $this->widget('booster.widgets.TbDetailView',array(
-'data'=>$model,
-'attributes'=>array(
-		'NewsID',
-		'NewsHeader',
-		'NewsTitle',
-		'NewsDetail',
-		'NewsImage',
-		'InsertBy',
-		'InsertDateTime',
-		'UpdateBy',
-		'UpdateDatetime',
-		'Counter',
-),
-)); ?>
+	
+	<?php $this->widget(
+    'booster.widgets.TbPanel',
+    array(
+        'title' => 'รายละเอียดข่าว : '.$model->NewsHeader,
+    	'context' => 'info',
+		//'padContent' => false,
+    //    'headerIcon' => 'user',
+        'content' =>  $this->renderPartial('_form_detail_news', array('model'=>$model),true,false),
+    )
+);?>
+		</div>
+		

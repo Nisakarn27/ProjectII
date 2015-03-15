@@ -6,7 +6,7 @@ class NewsController extends Controller
 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 * using two-column layout. See 'protected/views/layouts/column2.php'.
 */
-public $layout='//layouts/column2';
+public $layout='//layouts/column1';
 
 /**
 * @return array action filters
@@ -27,11 +27,11 @@ public function accessRules()
 {
 return array(
 array('allow',  // allow all users to perform 'index' and 'view' actions
-'actions'=>array('index','view'),
+'actions'=>array('create','index','view'),
 'users'=>array('*'),
 ),
 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-'actions'=>array('create','update'),
+'actions'=>array('update'),
 'users'=>array('@'),
 ),
 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -50,6 +50,9 @@ array('deny',  // deny all users
 */
 public function actionView($id)
 {
+$model=$this->loadModel($id);
+$model->Counter=$model->Counter+1;
+$model->Save();
 $this->render('view',array(
 'model'=>$this->loadModel($id),
 ));
@@ -62,15 +65,33 @@ $this->render('view',array(
 public function actionCreate()
 {
 $model=new News;
+if ( isset( $_POST['News'] ) )
+ {
+	$rnd = "resize";
+	
+	$model->attributes=$_POST['News'];
+		
+	$valid = $model->validate ();
+	
+	if ( $news = CUploadedFile::getInstance ( $model,'NewsImage')) {
+			// path for file upload
+			$path = Yii::getPathOfAlias ( 'webroot' ) . '/upload/News/';
+			// use image name as Name Image
+			$filename = $news ;
+			// uploaded image to path
+			$news->saveAs ( $path . $filename );
+			$model->NewsImage = $filename;}
+			$model->NewsID = $model->NewsID;
+			//resize image
+			Yii::import("ext.EPhpThumb.EPhpThumb.EPhpThumb");
+			$thumb=new EPhpThumb();
+			$thumb->init(); //this is needed
+			$thumb=Yii::app()->phpThumb->create($path . $filename );
+			$thumb->adaptiveResize(100,100);
+			$thumb->save($path .$rnd. $filename );
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
-if(isset($_POST['News']))
-{
-$model->attributes=$_POST['News'];
-if($model->save())
-$this->redirect(array('view','id'=>$model->NewsID));
+	if ( $model->save() )
+		$this->redirect( array( 'view', 'id'=>$model->NewsID ) );
 }
 
 $this->render('create',array(

@@ -10,6 +10,18 @@ array('label'=>'Manage News','url'=>array('admin')),
 );
 ?>
 
-<h1>Create News</h1>
+<div class="span1"></div>
+<div class="span10">
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+	<?php $this->widget(
+    'booster.widgets.TbPanel',
+    array(
+        'title' => 'เพิ่มข่าวประชาสัมพันธ์',
+    	'context' => 'primary',
+		//'padContent' => false,
+     //   'headerIcon' => 'lock',
+        'content' =>  $this->renderPartial('_form', array('model'=>$model),true,false),
+    )
+);?>
+		
+		</div>

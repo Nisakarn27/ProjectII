@@ -26,16 +26,22 @@ class SiteController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
+	{
 	
-	{$dataProvider=new CActiveDataProvider('News',array(
-    'criteria'=>array(
-        'order'=>'Counter DESC',
-    ),
-     'pagination'=>array(
-        'pageSize'=>2,
-    ),));
+		$dataProvider=new CActiveDataProvider('News',array(
+			    'criteria'=>array(
+			        'order'=>'NewsID DESC',
+			    ),
+			     'pagination'=>array(
+			        'pageSize'=>2,
+			    ),));
+		
+	
+		
 		$this->render('index',array(
 		'dataProvider'=>$dataProvider,
+		//'dataProvider1'=>$slider,
+				
 		));
 	}
 

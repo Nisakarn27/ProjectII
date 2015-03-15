@@ -33,7 +33,8 @@ class News extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('NewsHeader, NewsTitle, NewsDetail, NewsImage, InsertBy, InsertDateTime, UpdateBy, UpdateDatetime', 'required'),
+			array('NewsImage', 'file','types'=>'jpg,gif,png,jpeg', 'allowEmpty'=>true, 'on'=>'update'), //
+			array('NewsHeader, NewsTitle, NewsDetail', 'required'),
 			array('InsertBy, UpdateBy, Counter', 'numerical', 'integerOnly'=>true),
 			array('NewsHeader, NewsTitle, NewsImage', 'length', 'max'=>200),
 			// The following rule is used by search().
@@ -60,15 +61,15 @@ class News extends CActiveRecord
 	{
 		return array(
 			'NewsID' => 'News',
-			'NewsHeader' => 'News Header',
-			'NewsTitle' => 'News Title',
-			'NewsDetail' => 'News Detail',
-			'NewsImage' => 'News Image',
+			'NewsHeader' => 'หัวข้อข่าว',
+			'NewsTitle' => 'รายละเอียดอย่างย่อ',
+			'NewsDetail' => 'รายละเอียดข่าว',
+			'NewsImage' => 'รูปภาพ',
 			'InsertBy' => 'Insert By',
 			'InsertDateTime' => 'Insert Date Time',
 			'UpdateBy' => 'Update By',
 			'UpdateDatetime' => 'Update Datetime',
-			'Counter' => 'Counter',
+			'Counter' => 'จำนวนผู้เข้าชม',
 		);
 	}
 

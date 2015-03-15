@@ -28,7 +28,7 @@ return array(
 				// yiistrap configuration
 				'bootstrap' => realpath(__DIR__ . '/../extensions/bootstrap'), // change if necessary
 				'yiiwheels' => realpath(__DIR__ . '/../extensions/yiiwheels'), // change if necessary
-		
+				'foundation' =>realpath(__DIR__ . '/../extensions/yiifoundation'),
 		),
 		'modules'=>array(
 		// uncomment the following to enable the Gii tool
@@ -58,7 +58,9 @@ return array(
 // 				'allowAutoLogin'=>true,
 // 				'class'=>'WebUser',
 // 		),
-		
+		'phpThumb'=>array(
+				'class'=>'ext.EPhpThumb.EPhpThumb',
+		),
 		'bootstrap' => array(
 				'class' => 'bootstrap.components.Booster',
 				'responsiveCss' => true,
